@@ -69,7 +69,7 @@ namespace WeatherApp.Services
 
         public async Task<IEnumerable<CountryDto>> GetRegionConutries(string regionCode)
         {
-            var countries = await _context.Countries.Where(c => c.RegionId == regionCode).ToListAsync();
+            var countries = await _context.Countries.Include(c=>c.Cities).Where(c => c.RegionId == regionCode).ToListAsync();
             if (countries.Count() > 0)
                 return _mapper.Map<List<Country>, List<CountryDto>>(countries);
 

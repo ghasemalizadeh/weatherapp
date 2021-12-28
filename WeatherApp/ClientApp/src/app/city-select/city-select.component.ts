@@ -38,7 +38,11 @@ export class CitySelectComponent implements OnInit {
     this.locationService.getAdminAreas(this.selectedLocation.country).subscribe(result=>
       {
         this.adminAreas = result as any[];
-        console.log(this.adminAreas);
+
+        const selectedArea = this.countries.find(c=>c.id == this.selectedLocation.country);
+        console.log(selectedArea);
+        this.cities = selectedArea.cities;
+        
       });
    
   }
@@ -50,7 +54,6 @@ export class CitySelectComponent implements OnInit {
     this.locationService.getRegionCountries(this.selectedLocation.region).subscribe(result=>
       {
         this.countries = result as any[];
-        console.log(this.countries);
       });
   }
 
