@@ -1,0 +1,47 @@
+<div class="form-group">
+
+  <label for="region">Regions</label>
+  <select name="" id="region" class="form-control" (change)="onRegionChanged()" [(ngModel)]="selectedLocation.region" name="region" >
+      <option>1</option>
+      <option *ngFor="let r of regions" value="{{r.id}}">{{r.englishName}}</option>
+  </select>
+  
+
+    <label for="country">Country</label>
+    <select name="" id="country" class="form-control" (change)="onCountryChanged()" [(ngModel)]="selectedLocation.country" name="country" >
+        <option>1</option>
+        <option *ngFor="let c of countries" value="{{c.id}}">{{c.englishName}}</option>
+    </select>
+
+    <label for="adminAreas">Administrative Areas</label>
+    <select name="" id="adminAreas" class="form-control" (change)="onAdminAreaChanged()" [(ngModel)]="selectedLocation.adminArea" name="adminarea" >
+      
+        <option *ngFor="let a of adminAreas" value="{{a.id}}">{{a.englishName}}</option>
+    </select>
+
+
+    <label for="city">City</label>
+    <select name="" id="city" class="form-control" (change)="onCityChanged()" [(ngModel)]="selectedLocation.area" name="area">
+       
+        <option *ngFor="let c of cities" value="{{c.key}}"  >{{c.englishName}}</option>
+    </select>
+
+    <label for="citySearch">Search(If a city is not in list search it hear and then select it from list)</label>
+    <input type="text" name="" id="citySearch" class="form-control" [(ngModel)]="selectedLocation.citySearch" name="citySearch"/>
+    <button type="button" class="btn btn-primary" (click)="onSearchClicked()">Search</button>
+         
+   
+</div>
+
+<ng-container *ngIf="render" >
+<div class="row">
+     <div *ngFor= "let d of fiveDayForcast.dailyForecasts" class="col-md-4" class="card" style="width: 18rem;">
+        <div class="card-body" >
+          <h5 class="card-title">{{fiveDayForcast.cityName}}</h5>
+          <h6 class="card-title">{{d.date}}</h6>
+          <h6 class="card-title">Minimum {{d.minmumTemprature}} {{d.tempratureUnit}}'</h6>
+          <h6 class="card-title">Maxiumm {{d.maximumTemprature}} {{d.tempratureUnit}}'</h6>
+        </div>
+      </div>
+</div>
+</ng-container>
