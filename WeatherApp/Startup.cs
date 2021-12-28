@@ -19,6 +19,8 @@ namespace WeatherApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
+           
         }
 
         public IConfiguration Configuration { get; }
@@ -34,13 +36,12 @@ namespace WeatherApp
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-
-
             services.AddSingleton<IWeatherApiService, AccuWeatherService>();
             services.AddScoped<IForecastService, ForecastService>();
-             services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<ILocationService, LocationService>();
+
             services.AddDbContext<WeatherContext>(options => options.
-            UseSqlServer("server = localhost\\SQLEXPRESS; database= Weather;Trusted_Connection=True;"));
+            UseSqlServer(Configuration["ConnectionString"]));
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
